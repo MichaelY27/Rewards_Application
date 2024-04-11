@@ -15,7 +15,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/reward/get/1",
+							"raw": "http://localhost:8080/reward/1",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -23,7 +23,6 @@
 							"port": "8080",
 							"path": [
 								"reward",
-								"get",
 								"1"
 							]
 						}
@@ -36,7 +35,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/reward/get/summary",
+							"raw": "http://localhost:8080/reward/summary",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -44,7 +43,6 @@
 							"port": "8080",
 							"path": [
 								"reward",
-								"get",
 								"summary"
 							]
 						}
@@ -62,7 +60,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/transaction/get/1",
+							"raw": "http://localhost:8080/transaction/1",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -70,7 +68,6 @@
 							"port": "8080",
 							"path": [
 								"transaction",
-								"get",
 								"1"
 							]
 						}
@@ -78,12 +75,12 @@
 					"response": []
 				},
 				{
-					"name": "Get User All Transaction By User Id",
+					"name": "Get Transactions By User Id",
 					"request": {
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/transaction/get/all/1",
+							"raw": "http://localhost:8080/transaction/user/1",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -91,8 +88,7 @@
 							"port": "8080",
 							"path": [
 								"transaction",
-								"get",
-								"all",
+								"user",
 								"1"
 							]
 						}
@@ -106,7 +102,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"userId\": 1,\r\n    \"amount\": 200,\r\n    \"issuedDate\": \"2024-04-11 22:12:15\"\r\n\r\n}",
+							"raw": "{\r\n    \"userId\": 1,\r\n    \"amount\": 120,\r\n    \"issuedDate\": \"2024-02-11 22:12:15\"\r\n\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -114,7 +110,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/transaction/create",
+							"raw": "http://localhost:8080/transaction/single",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -122,7 +118,36 @@
 							"port": "8080",
 							"path": [
 								"transaction",
-								"create"
+								"single"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Many Transaction",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "[\r\n    {\r\n        \"userId\": 1,\r\n        \"amount\": 80,\r\n        \"issuedDate\": \"2024-01-11 22:12:15\"\r\n    },\r\n    {\r\n        \"userId\": 1,\r\n        \"amount\": 120,\r\n        \"issuedDate\": \"2024-02-11 22:12:15\"\r\n    }\r\n \r\n]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/transaction/many",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"transaction",
+								"many"
 							]
 						}
 					},
@@ -130,35 +155,6 @@
 				},
 				{
 					"name": "Update Transaction",
-					"request": {
-						"method": "PATCH",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"transactionId\": 2,\r\n    \"userId\": 3,\r\n    \"amount\": 400,\r\n    \"issuedDate\": \"2024-04-11 23:12:15\"\r\n\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:8080/transaction/update",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"transaction",
-								"update"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Delete Transaction",
 					"request": {
 						"method": "PATCH",
 						"header": [],
@@ -172,7 +168,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/transaction/update",
+							"raw": "http://localhost:8080/transaction/single",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -180,7 +176,36 @@
 							"port": "8080",
 							"path": [
 								"transaction",
-								"update"
+								"single"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Transaction",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"transactionId\": 1,\r\n    \"userId\": 3,\r\n    \"amount\": 400,\r\n    \"issuedDate\": \"2024-04-11 23:12:15\"\r\n\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/transaction/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"transaction",
+								"1"
 							]
 						}
 					},
@@ -203,7 +228,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8080/transaction/create/list",
+					"raw": "http://localhost:8080/transaction/many",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -211,8 +236,7 @@
 					"port": "8080",
 					"path": [
 						"transaction",
-						"create",
-						"list"
+						"many"
 					]
 				}
 			},
