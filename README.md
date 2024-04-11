@@ -20,7 +20,7 @@ please visit the following link to see the [API Documentation](http://localhost:
 ## 3. Test Data
 Generate test data by send a predefined request in the postman collection, you can also generate your won data by sending a POST request to `http://localhost:8080/transaction/create/list`
 
-Here is an example of the request body and the response
+Here is an example of the request body and the user summary response
 ```json
 [
     {
