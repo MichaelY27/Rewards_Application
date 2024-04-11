@@ -17,12 +17,10 @@ password: 123
 ## 2. API Endpoints
 please visit the following link to see the [API Documentation](http://localhost:8080/swagger-ui.html)
 
-## 3. Test
-Please visit the following link to see the [Test Coverage](http://localhost:8080/target/site/jacoco/index.html)
-## 3. Predefined Data
+## 3. Test Data
 Generate test data by send a predefined request in the postman collection, you can also generate your won data by sending a POST request to `http://localhost:8080/transaction/create/list`
 
-Here is an example of the request body and the user summary response
+Here is an example of the request body to generate test data
 ```json
 [
     {
@@ -52,6 +50,7 @@ Here is an example of the request body and the user summary response
     }
 ]
 ```
+User Summary Response
 ```json
 {
     "timestamp": "2024-04-11T14:55:51.386Z",
