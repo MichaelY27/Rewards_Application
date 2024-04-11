@@ -24,6 +24,9 @@ public class CalculationServiceTest {
     @Mock
     private RewardsConfig rewardsConfig;
 
+    /**
+     * Set up the rewardsConfig mock object before each test
+     */
     @BeforeEach
     public void setUp() {
         MockitoAnnotations.openMocks(this);
@@ -33,6 +36,11 @@ public class CalculationServiceTest {
         when(rewardsConfig.getLevel2Points()).thenReturn(BigDecimal.valueOf(2));
         calculationService = new CalculationService(rewardsConfig);
     }
+
+    /**
+     * Test calculateRewardPoints() method
+     * Test different amounts and expected results
+     */
     @Test
     public void testCalculateRewardsPoints() {
         int[] testAmounts = {0, 50, 100, 120, 150, 200};
@@ -44,6 +52,10 @@ public class CalculationServiceTest {
         }
     }
 
+    /**
+     * Test doCalculation() method
+     * Test different transactions and expected results
+     */
     @Test
     public void testDoCalculation() {
         List<Transaction> transactions = Arrays.asList(
@@ -63,6 +75,9 @@ public class CalculationServiceTest {
         assertEquals(160, userReward.getTotalPoints(), "Total points should sum up correctly.");
     }
 
+    /**
+     * Test doCalculation() method with no transactions
+     */
     @Test
     public void testDoCalculationWithNoTransactions() {
         List<Transaction> transactions = Arrays.asList();
@@ -78,6 +93,9 @@ public class CalculationServiceTest {
         assertEquals(0, userReward.getTotalPoints(), "Total points should sum up correctly.");
     }
 
+    /**
+     * Test doCalculation() method only with transactions in the past three months
+     */
     @Test
     public void testDoCalculationWithNoTransactionsPastThreeMonth() {
         List<Transaction> transactions = Arrays.asList(

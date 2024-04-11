@@ -39,11 +39,6 @@ public interface ITransactionService {
     public void deleteTransaction(Long transactionId);
 
     /**
-     * Generate test transactions data
-     */
-    public void generateTestTransactions();
-
-    /**
      * Create a list of transactions
      * @param transactionDTOList the list of transaction information
      * @return the list of generated id of the created transactions

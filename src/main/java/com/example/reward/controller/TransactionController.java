@@ -32,7 +32,7 @@ public class TransactionController {
         this.transactionService = transactionService;
     }
 
-    @GetMapping("/get/{transactionId}")
+    @GetMapping("/{transactionId}")
     @Operation(summary = "Get a transaction information by transaction id")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Transaction retrieved successfully", content = @Content(mediaType = "application/json",  schema = @Schema(implementation = ResponseDTO.class))),
@@ -41,20 +41,22 @@ public class TransactionController {
             @ApiResponse(responseCode = "500", description = "Internal server error", content = @Content(mediaType = "application/json",  schema = @Schema(implementation = ResponseDTO.class)))
             }
     )
-    public ResponseDTO getTransactionById(@PathVariable Long transactionId) {
+    public ResponseEntity<ResponseDTO> getTransactionById(@PathVariable Long transactionId) {
 
-        return ResponseDTO.builder().timestamp(Instant.now()).messageType("Success").message(transactionService.getTransactionById(transactionId)).build();
+        return new ResponseEntity<>(ResponseDTO.builder().timestamp(Instant.now()).messageType("Success").message(transactionService.getTransactionById(transactionId)).build(), HttpStatus.OK);
+
     }
 
-    @GetMapping("/get/all/{userId}")
+    @GetMapping("/user/{userId}")
     @Operation(summary = "Get all transactions by user id")
     @ApiResponse(responseCode = "200", description = "All transactions retrieved successfully")
-    public ResponseDTO getAllTransactions(@PathVariable Long userId) {
+    public ResponseEntity<ResponseDTO> getAllTransactions(@PathVariable Long userId) {
 
-        return ResponseDTO.builder().timestamp(Instant.now()).messageType("Success").message(transactionService.getTransactionByUserId(userId)).build();
+        return new ResponseEntity<>(ResponseDTO.builder().timestamp(Instant.now()).messageType("Success").message(transactionService.getTransactionByUserId(userId)).build(), HttpStatus.OK);
+
     }
 
-    @PostMapping("/create")
+    @PostMapping("/single")
     @Operation(summary = "Create a new transaction")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Transaction created successfully", content = @Content(mediaType = "application/json",  schema = @Schema(implementation = ResponseDTO.class))),
@@ -67,7 +69,7 @@ public class TransactionController {
         return new ResponseEntity<>(ResponseDTO.builder().timestamp(Instant.now()).messageType("Success").message("Transaction created successfully").build(), HttpStatus.OK);
     }
 
-    @PostMapping("/create/list")
+    @PostMapping("/many")
     @Operation(summary = "Create list of new transactions, return generated transaction ids")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Transaction created successfully", content = @Content(mediaType = "application/json",  schema = @Schema(implementation = ResponseDTO.class))),
@@ -81,7 +83,7 @@ public class TransactionController {
     }
 
 
-    @PatchMapping("/update")
+    @PatchMapping("/single")
     @Operation(summary = "Partially update a transaction")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Transaction updated successfully", content = @Content(mediaType = "application/json", schema = @Schema(implementation = ResponseDTO.class))),
@@ -95,7 +97,7 @@ public class TransactionController {
         return new ResponseEntity<>(ResponseDTO.builder().timestamp(Instant.now()).messageType("Success").message("Transaction updated successfully").build(), HttpStatus.OK);
     }
 
-    @DeleteMapping("/delete/{transactionId}")
+    @DeleteMapping("/{transactionId}")
     @Operation(summary = "Delete a transaction by transaction id")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Transaction deleted successfully", content = @Content(mediaType = "application/json", schema = @Schema(implementation = ResponseDTO.class))),

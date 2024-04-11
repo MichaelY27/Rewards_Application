@@ -20,6 +20,7 @@ public class CalculationService implements ICalculationService {
         this.rewardsConfig = rewardsConfig;
     }
 
+
     @Override
     public void doCalculation(List<Transaction> transactions, LocalDateTime startDate, LocalDateTime endDate, UserReward userReward) {
 

@@ -78,30 +78,6 @@ public class TransactionService implements ITransactionService {
         transactionRepository.delete(transaction);
     }
 
-    @Override
-    public void generateTestTransactions() {
-        // User 1
-        // last month, user 1, 3 transactions: 100/150/200 $ respectively
-        transactionRepository.save(new Transaction(1L, BigDecimal.valueOf(120), LocalDateTime.now().minusMonths(1)));
-        transactionRepository.save(new Transaction(1L, BigDecimal.valueOf(150), LocalDateTime.now().minusMonths(1)));
-        transactionRepository.save(new Transaction(1L, BigDecimal.valueOf(200), LocalDateTime.now().minusMonths(1)));
-        // two months ago, user 1, 1 transactions: 100 $
-        transactionRepository.save(new Transaction(1L, BigDecimal.valueOf(100), LocalDateTime.now().minusMonths(2)));
-        // three months ago, user 1, 1 transactions: 200 $
-        transactionRepository.save(new Transaction(1L, BigDecimal.valueOf(200), LocalDateTime.now().minusMonths(3)));
-
-        // User 2
-        // last month, user 2, 2 transactions: 80/150 $ respectively
-        transactionRepository.save(new Transaction(2L, BigDecimal.valueOf(80), LocalDateTime.now().minusMonths(1)));
-        transactionRepository.save(new Transaction(2L, BigDecimal.valueOf(150), LocalDateTime.now().minusMonths(1)));
-        // two months ago, user 2, 1 transactions: 300 $
-        transactionRepository.save(new Transaction(2L, BigDecimal.valueOf(100), LocalDateTime.now().minusMonths(2)));
-
-        // User 3
-        // three months ago, user 3, 1 transactions: 300 $
-        transactionRepository.save(new Transaction(3L, BigDecimal.valueOf(300), LocalDateTime.now().minusMonths(3)));
-
-    }
 
 
 }

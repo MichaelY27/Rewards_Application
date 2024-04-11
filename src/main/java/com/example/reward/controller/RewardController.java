@@ -40,7 +40,7 @@ public class RewardController {
             @ApiResponse(responseCode = "404", description = "User not found", content = @Content(mediaType = "application/json", schema = @Schema(implementation = ResponseDTO.class))),
             @ApiResponse(responseCode = "500", description = "Internal server error", content = @Content(mediaType = "application/json", schema = @Schema(implementation = ResponseDTO.class)))
     })
-    @GetMapping("get/{userId}")
+    @GetMapping("/{userId}")
     public ResponseEntity<ResponseDTO> getRewardPoints(@PathVariable @NotNull(message = "User id can't be null") Long userId){
         UserReward userReward = rewardService.getRewardPointsByUserId(userId);
         return new ResponseEntity<>(ResponseDTO.builder().timestamp(Instant.now()).messageType("Success").message(userReward).build(), HttpStatus.OK);
@@ -52,7 +52,7 @@ public class RewardController {
             @ApiResponse(responseCode = "200", description = "Reward points retrieved successfully", content = @Content(mediaType = "application/json", schema = @Schema(implementation = ResponseDTO.class))),
             @ApiResponse(responseCode = "500", description = "Internal server error", content = @Content(mediaType = "application/json", schema = @Schema(implementation = ResponseDTO.class)))
     })
-    @GetMapping("get/summary")
+    @GetMapping("/summary")
     public ResponseEntity<ResponseDTO> getRewardPointsSummary(){
         List<UserReward> userRewardList = rewardService.getAllUserRewards();
         return new ResponseEntity<>(ResponseDTO.builder().timestamp(Instant.now()).messageType("Success").message(userRewardList).build(), HttpStatus.OK);

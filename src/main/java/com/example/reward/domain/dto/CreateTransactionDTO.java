@@ -2,7 +2,9 @@ package com.example.reward.domain.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 
 import javax.validation.constraints.NotBlank;
@@ -13,6 +15,8 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class CreateTransactionDTO implements Serializable {
     @NotNull(message = "User id can't be null")
     @Positive(message = "User id must be positive")
