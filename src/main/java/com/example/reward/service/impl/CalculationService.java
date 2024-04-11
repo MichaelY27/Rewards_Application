@@ -16,7 +16,7 @@ public class CalculationService implements ICalculationService {
 
     RewardsConfig rewardsConfig;
     @Autowired
-    CalculationService(RewardsConfig rewardsConfig) {
+    public CalculationService(RewardsConfig rewardsConfig) {
         this.rewardsConfig = rewardsConfig;
     }
 
