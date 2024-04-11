@@ -1,7 +1,7 @@
 # Rewards Application
 A shopping reward application that calculate the earned awarding points based on the purchased order
 
-## Getting Started
+## 1. Getting Started
 1. Start the application located in the `com.example.reward.RewardsApplication`
 
 
@@ -12,11 +12,15 @@ database url: jdbc:h2:mem:testdb
 username: 123
 password: 123
 ```
-3. Import Postman Collection to test the API Endpoints in [Postman Configuration](./postman.json)
- 
-4. Generate test data by send a predefined in the postman collection, you can also generate your won data by sending a POST request to `http://localhost:8080/transaction/create/list`
-    
-5. Test data generated in Postman and estimated summary
+3. Import [Postman Configuration](./postman.json) to test the API Endpoints
+
+## 2. API Endpoints
+please visit the following link to see the [API Documentation](http://localhost:8080/swagger-ui.html)
+
+## 3. Test Data
+Generate test data by send a predefined request in the postman collection, you can also generate your won data by sending a POST request to `http://localhost:8080/transaction/create/list`
+
+Here is an example of the request body and the response
 ```json
 [
     {
@@ -73,12 +77,10 @@ password: 123
             "threeMonthsAgoPoints": 150
         }
     ]
-}ex
+}
 ```
 
 
-## API Endpoints
-please visit the following link to see the [API Documentation](http://localhost:8080/swagger-ui.html)
 
 
 
