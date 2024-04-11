@@ -10,6 +10,7 @@ import com.example.reward.service.ITransactionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -36,21 +37,20 @@ public class TransactionService implements ITransactionService {
         return transactionRepository.findTransactionsByUserId(userId);
     }
 
+    @Transactional
     @Override
     public Long createTransaction(CreateTransactionDTO transactionDTO) {
         Transaction transaction = new Transaction(transactionDTO);
         return transactionRepository.save(transaction).getTransactionId();
     }
-
+    @Transactional
     @Override
     public List<Long> createTransactionList(List<CreateTransactionDTO> transactionDTOList) {
         return transactionDTOList.stream().map(Transaction::new).map(transactionRepository::save).map(Transaction::getTransactionId).collect(Collectors.toList());
     }
 
-    /**
-     * Update or Partially update a transaction based on transaction information
-     * @param transactionDTO the transaction information
-     */
+
+    @Transactional
     @Override
     public void updateTransaction(UpdateTransactionDTO transactionDTO) {
         Transaction transaction = transactionRepository.findByTransactionId(transactionDTO.getTransactionId())
@@ -70,6 +70,7 @@ public class TransactionService implements ITransactionService {
         }
     }
 
+    @Transactional
     @Override
     public void deleteTransaction(Long transactionId) {
         Transaction transaction = transactionRepository.findByTransactionId(transactionId)

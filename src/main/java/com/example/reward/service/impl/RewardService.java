@@ -8,6 +8,7 @@ import com.example.reward.service.IRewardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -24,6 +25,7 @@ public class RewardService implements IRewardService {
         this.calculationService = calculationService;
     }
 
+    @Transactional
     @Override
     public UserReward getRewardPointsByUserId(Long userId) {
 
@@ -39,7 +41,7 @@ public class RewardService implements IRewardService {
 
         return userReward;
     }
-
+    @Transactional
     @Override
     public List<UserReward> getAllUserRewards() {
         List<Long> userIds = transactionRepository.findDistinctUserId();
