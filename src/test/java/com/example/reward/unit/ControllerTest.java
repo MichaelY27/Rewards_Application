@@ -1,32 +1,20 @@
 package com.example.reward.unit;
 
 import com.example.reward.controller.TransactionController;
-import com.example.reward.domain.Transaction;
-import com.example.reward.domain.dto.ResponseDTO;
-import com.example.reward.domain.exceptions.OperationUnableToProcessException;
 import com.example.reward.service.impl.TransactionService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.example.reward.domain.dto.CreateTransactionDTO;
-import com.example.reward.domain.dto.ResponseDTO;
 import com.example.reward.domain.dto.UpdateTransactionDTO;
-import com.example.reward.service.impl.TransactionService;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-import org.springframework.web.context.WebApplicationContext;
 
 import java.math.BigDecimal;
-import java.time.Instant;
 import java.time.LocalDateTime;
 
 import static org.mockito.ArgumentMatchers.any;
@@ -36,7 +24,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @ExtendWith(SpringExtension.class)
 @WebMvcTest(TransactionController.class)
-public class TransactionControllerTest {
+public class ControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
