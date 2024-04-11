@@ -5,6 +5,7 @@ import com.example.reward.service.impl.TransactionService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.example.reward.domain.dto.CreateTransactionDTO;
 import com.example.reward.domain.dto.UpdateTransactionDTO;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -24,9 +26,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @ExtendWith(SpringExtension.class)
 @WebMvcTest(TransactionController.class)
-public class ControllerTest {
+public class TransactionControllerTest {
 
-    @Autowired
     private MockMvc mockMvc;
 
     @MockBean
@@ -34,6 +35,11 @@ public class ControllerTest {
 
     @Autowired
     private ObjectMapper objectMapper;
+
+    @BeforeEach
+    public void setup() {
+        mockMvc = MockMvcBuilders.standaloneSetup(new TransactionController(transactionService)).build();
+    }
 
     /**
      * Test createTransaction method
