@@ -1,4 +1,4 @@
-package com.example.reward.unit;
+package com.example.reward.unit.service;
 
 
 import com.example.reward.dao.TransactionRepository;
@@ -14,6 +14,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -39,7 +40,7 @@ public class TransactionServiceTest {
      * The result should be the same as the mock transaction
      */
     @Test
-    void testGetTransactionByIdWithTransaction() {
+    void testGetTransactionById_withTransaction() {
         long transactionId = 1L;
         Transaction mockTransaction = new Transaction();
         when(transactionRepository.findByTransactionId(transactionId)).thenReturn(Optional.of(mockTransaction));
@@ -55,7 +56,7 @@ public class TransactionServiceTest {
      * TransactionNotExistException should be thrown
      */
     @Test
-    void testGetTransactionByIdWithoutTransaction() {
+    void testGetTransactionById_withoutTransaction() {
         long transactionId = 1L;
         when(transactionRepository.findByTransactionId(transactionId)).thenReturn(Optional.empty());
 
@@ -68,7 +69,7 @@ public class TransactionServiceTest {
      * The result should be the same as the saved transaction id
      */
     @Test
-    void testCreateTransactionSuccess() {
+    void testCreateTransaction_success() {
         CreateTransactionDTO dto = new CreateTransactionDTO();
         Transaction savedTransaction = new Transaction();
         savedTransaction.setTransactionId(1L);
@@ -86,7 +87,7 @@ public class TransactionServiceTest {
      * The result should be the same as the saved transaction id list
      */
     @Test
-    void testUpdateTransactionWhenExists() {
+    void testUpdateTransaction_whenExists() {
         UpdateTransactionDTO dto = new UpdateTransactionDTO();
         dto.setTransactionId(1L);
         Transaction existingTransaction = new Transaction();
@@ -101,7 +102,7 @@ public class TransactionServiceTest {
      * OperationUnableToProcessException should be thrown
      */
     @Test
-    void testUpdateTransactionWhenNotExists() {
+    void testUpdateTransaction_whenNotExists() {
         UpdateTransactionDTO dto = new UpdateTransactionDTO();
         dto.setTransactionId(1L);
         when(transactionRepository.findByTransactionId(dto.getTransactionId())).thenReturn(Optional.empty());
@@ -114,7 +115,7 @@ public class TransactionServiceTest {
      * The transaction should be deleted
      */
     @Test
-    void testDeleteTransactionWhenExists() {
+    void testDeleteTransaction_whenExists() {
         long transactionId = 1L;
         Transaction transaction = new Transaction(); // Populate with expected properties
         when(transactionRepository.findByTransactionId(transactionId)).thenReturn(Optional.of(transaction));
@@ -128,7 +129,7 @@ public class TransactionServiceTest {
      * OperationUnableToProcessException should be thrown
      */
     @Test
-    void testDeleteTransactionWhenNotExists() {
+    void testDeleteTransaction_whenNotExists() {
         long transactionId = 1L;
         when(transactionRepository.findByTransactionId(transactionId)).thenReturn(Optional.empty());
 
@@ -141,7 +142,7 @@ public class TransactionServiceTest {
      * The result should be the same as the mock transactions
      */
     @Test
-    void testGetTransactionByUserIdWhenFound() {
+    void testGetTransactionByUserId_whenFound() {
         long userId = 1L;
         List<Transaction> expectedTransactions = Arrays.asList(new Transaction(), new Transaction());
         when(transactionRepository.findTransactionsByUserId(userId)).thenReturn(expectedTransactions);
@@ -159,7 +160,7 @@ public class TransactionServiceTest {
      * The result should be empty
      */
     @Test
-    void testGetTransactionByUserIdWhenNotFound() {
+    void testGetTransactionByUserId_whenNotFound() {
         long userId = 1L;
         when(transactionRepository.findTransactionsByUserId(userId)).thenReturn(Collections.emptyList());
 
@@ -186,9 +187,6 @@ public class TransactionServiceTest {
         assertEquals(transactions.size(), ids.size());
         verify(transactionRepository, times(dtos.size())).save(any(Transaction.class));
     }
-
-
-
 
 
 }

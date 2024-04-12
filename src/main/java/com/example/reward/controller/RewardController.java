@@ -50,6 +50,8 @@ public class RewardController {
     @Operation(summary = "Get reward points summary")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Reward points retrieved successfully", content = @Content(mediaType = "application/json", schema = @Schema(implementation = ResponseDTO.class))),
+            @ApiResponse(responseCode = "400", description = "Invalid request data", content = @Content(mediaType = "application/json", schema = @Schema(implementation = ResponseDTO.class))),
+            @ApiResponse(responseCode = "404", description = "User not found", content = @Content(mediaType = "application/json", schema = @Schema(implementation = ResponseDTO.class))),
             @ApiResponse(responseCode = "500", description = "Internal server error", content = @Content(mediaType = "application/json", schema = @Schema(implementation = ResponseDTO.class)))
     })
     @GetMapping("/summary")

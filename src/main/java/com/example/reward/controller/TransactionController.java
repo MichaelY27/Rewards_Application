@@ -44,7 +44,6 @@ public class TransactionController {
     public ResponseEntity<ResponseDTO> getTransactionById(@PathVariable Long transactionId) {
 
         return new ResponseEntity<>(ResponseDTO.builder().timestamp(Instant.now()).messageType("Success").message(transactionService.getTransactionById(transactionId)).build(), HttpStatus.OK);
-
     }
 
     @GetMapping("/user/{userId}")
@@ -77,7 +76,7 @@ public class TransactionController {
             @ApiResponse(responseCode = "500", description = "Internal server error", content = @Content(mediaType = "application/json", schema = @Schema(implementation = ResponseDTO.class)))
     }
     )
-    public ResponseEntity<ResponseDTO> createTransactionList(@NotEmpty(message = "transaction list can't be empty") @RequestBody List<@Valid CreateTransactionDTO> createTransactionDTOList) {
+    public ResponseEntity<ResponseDTO> createTransactionMany(@NotEmpty(message = "transaction list can't be empty") @RequestBody List<@Valid CreateTransactionDTO> createTransactionDTOList) {
         transactionService.createTransactionList(createTransactionDTOList);
         return new ResponseEntity<>(ResponseDTO.builder().timestamp(Instant.now()).messageType("Success").message("Transaction list created successfully").build(), HttpStatus.OK);
     }

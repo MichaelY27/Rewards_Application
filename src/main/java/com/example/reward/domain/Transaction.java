@@ -2,6 +2,7 @@ package com.example.reward.domain;
 
 import com.example.reward.domain.dto.CreateTransactionDTO;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

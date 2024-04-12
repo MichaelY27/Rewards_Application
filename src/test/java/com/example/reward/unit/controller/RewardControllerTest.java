@@ -1,4 +1,4 @@
-package com.example.reward.unit;
+package com.example.reward.unit.controller;
 
 import com.example.reward.controller.RewardController;
 import com.example.reward.domain.UserReward;
@@ -44,7 +44,7 @@ public class RewardControllerTest {
     @Test
     public void testGetRewardPoints() throws Exception {
         Long userId = 1L;
-        UserReward userReward = UserReward.builder().userId(userId).lastMonthPoints(0).twoMonthsAgoPoints(0).threeMonthsAgoPoints(0).totalPoints(0).build();
+        UserReward userReward = new UserReward(userId, 0, 0, 0, 0);
         when(rewardService.getRewardPointsByUserId(userId)).thenReturn(userReward);
 
         mockMvc.perform(get("/reward/{userId}", userId)
@@ -64,7 +64,7 @@ public class RewardControllerTest {
      */
     @Test
     public void testGetRewardPointsSummary() throws Exception {
-        List<UserReward> userRewards = Arrays.asList(UserReward.builder().userId(1L).lastMonthPoints(0).twoMonthsAgoPoints(0).threeMonthsAgoPoints(0).totalPoints(0).build(), UserReward.builder().userId(2L).lastMonthPoints(0).twoMonthsAgoPoints(0).threeMonthsAgoPoints(0).totalPoints(0).build());
+        List<UserReward> userRewards = Arrays.asList(new UserReward(1L, 0, 0, 0, 0), new UserReward(2L, 0, 0, 0, 0));
         when(rewardService.getAllUserRewards()).thenReturn(userRewards);
 
         mockMvc.perform(get("/reward/summary")

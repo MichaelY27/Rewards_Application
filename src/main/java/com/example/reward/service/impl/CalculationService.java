@@ -20,7 +20,13 @@ public class CalculationService implements ICalculationService {
         this.rewardsConfig = rewardsConfig;
     }
 
-
+    /**
+     * Calculate reward points for each transaction and sum up the points for each month
+     * @param transactions list of transactions
+     * @param startDate start date of three months ago
+     * @param endDate end date of current month
+     * @param userReward user reward object to store the points
+     */
     @Override
     public void doCalculation(List<Transaction> transactions, LocalDateTime startDate, LocalDateTime endDate, UserReward userReward) {
 
@@ -29,17 +35,27 @@ public class CalculationService implements ICalculationService {
         LocalDateTime lastThreeMonthStartDate = endDate.minusMonths(3).withDayOfMonth(1).withHour(0).withMinute(0).withSecond(0).withNano(0);
 
         transactions.forEach(transaction -> {
+            // last month
             if (transaction.getIssuedDate().isAfter(lastMonthStartDate) && transaction.getIssuedDate().isBefore(endDate)) {
                 userReward.setLastMonthPoints(userReward.getLastMonthPoints() + calculateRewardPoints(transaction));
-            } else if (transaction.getIssuedDate().isAfter(lastTwoMonthStartDate) && transaction.getIssuedDate().isBefore(lastMonthStartDate)) {
+            }
+            // two months ago
+            if (transaction.getIssuedDate().isAfter(lastTwoMonthStartDate) && transaction.getIssuedDate().isBefore(lastMonthStartDate)) {
                 userReward.setTwoMonthsAgoPoints(userReward.getTwoMonthsAgoPoints() + calculateRewardPoints(transaction));
-            } else if (transaction.getIssuedDate().isAfter(lastThreeMonthStartDate) && transaction.getIssuedDate().isBefore(lastTwoMonthStartDate)) {
+            }
+            // three months ago
+            if (transaction.getIssuedDate().isAfter(lastThreeMonthStartDate) && transaction.getIssuedDate().isBefore(lastTwoMonthStartDate)) {
                 userReward.setThreeMonthsAgoPoints(userReward.getThreeMonthsAgoPoints() + calculateRewardPoints(transaction));
             }
         });
         userReward.setTotalPoints(userReward.getLastMonthPoints() + userReward.getTwoMonthsAgoPoints() + userReward.getThreeMonthsAgoPoints());
     }
 
+    /**
+     * Calculate reward points for each transaction
+     * @param transaction transaction object
+     * @return reward points
+     */
     public Integer calculateRewardPoints(Transaction transaction) {
         BigDecimal total = transaction.getAmount();
         BigDecimal points = BigDecimal.valueOf(0);

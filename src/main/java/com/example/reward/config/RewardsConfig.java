@@ -12,7 +12,6 @@ import java.math.BigDecimal;
 @Configuration
 @ConfigurationProperties(prefix = "rewards")
 @Getter
-@Setter
 public class RewardsConfig {
 
     @Value("${rewards.threshold.level1}")
