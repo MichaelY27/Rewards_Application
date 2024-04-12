@@ -3,6 +3,7 @@ package com.example.reward.service.impl;
 import com.example.reward.config.RewardsConfig;
 import com.example.reward.domain.Transaction;
 import com.example.reward.domain.UserReward;
+import com.example.reward.domain.exceptions.IllegalTransactionException;
 import com.example.reward.service.ICalculationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -57,6 +58,9 @@ public class CalculationService implements ICalculationService {
      * @return reward points
      */
     public Integer calculateRewardPoints(Transaction transaction) {
+        if (transaction.getAmount().compareTo(BigDecimal.ZERO) < 0) {
+            throw new IllegalTransactionException("Transaction amount cannot be negative");
+        }
         BigDecimal total = transaction.getAmount();
         BigDecimal points = BigDecimal.valueOf(0);
         if (total.compareTo(rewardsConfig.getLevel2()) > 0) {
@@ -67,6 +71,9 @@ public class CalculationService implements ICalculationService {
         if (total.compareTo(rewardsConfig.getLevel1()) > 0) {
             BigDecimal first = total.subtract(rewardsConfig.getLevel1()).multiply(rewardsConfig.getLevel1Points());
             points = points.add(first);
+        }
+        if (points.compareTo(BigDecimal.valueOf(Integer.MAX_VALUE)) > 0) {
+            throw new IllegalTransactionException("Points exceed the maximum value");
         }
         return points.intValue();
     }
