@@ -72,6 +72,25 @@ public class DTOTest {
     }
 
     @Test
+    public void testBuilderToStringResponseDTO() {
+        Instant now = Instant.now();
+        ResponseDTO response = ResponseDTO.builder()
+                .timestamp(now)
+                .messageType("Error")
+                .message("An error occurred")
+                .build();
+        String toStringOutput = response.toString();
+
+        assertNotNull(toStringOutput, "toString output should not be null");
+        assertTrue(toStringOutput.contains("timestamp=" + now.toString()), "Timestamp should be included in toString output");
+        assertTrue(toStringOutput.contains("messageType=Error"), "Message type should be included in toString output");
+        assertTrue(toStringOutput.contains("message=An error occurred"), "Message content should be included in toString output");
+
+        assertEquals("ResponseDTO(timestamp=" + now.toString() + ", messageType=Error, message=An error occurred)",
+                toStringOutput, "toString output should match the expected format.");
+    }
+
+    @Test
     public void testEqualsAndHashCodeUpdateTransactionDTO() {
         LocalDateTime now = LocalDateTime.now();
         UpdateTransactionDTO dto1 = new UpdateTransactionDTO(1L, new BigDecimal("100.00"), now);

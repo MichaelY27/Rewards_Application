@@ -28,9 +28,6 @@ public class IntegrationTest {
     @Autowired
     private TestRestTemplate restTemplate;
 
-
-
-
     /**
      * Test getTransactionById method
      * User with id 1 should exist
@@ -75,11 +72,7 @@ public class IntegrationTest {
         assertEquals("Success", responseEntity.getBody().getMessageType());
     }
 
-    /**
-     * Test getAllTransactions method
-     * User with id 1 should exist
-     * The response should be a success message
-     */
+
     /**
      * Test getAllTransactions method
      * User with id 5 should not exist
@@ -94,6 +87,11 @@ public class IntegrationTest {
         assertEquals(422, responseEntity.getStatusCodeValue());
         assertEquals("Error", responseEntity.getBody().getMessageType());
     }
+    /**
+     * Test getAllTransactions method
+     * User with id 1 should exist
+     * The response should be a success message
+     */
     @Test
     @Order(5)
     void testDeleteTransactionSuccess() {
